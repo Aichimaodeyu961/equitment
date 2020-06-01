@@ -12,7 +12,7 @@
         <association property="role" javaType="role" column="role_id" select="equitment.dao.RoleDao.findRoleByID" fetchType="lazy"/>
     </resultMap>
 
-    <select id="login" resultType="user" parameterType="user">
+    <select id="login" resultMap="userMap" parameterType="user">
         select * from userinfo
         where user_name = #{user.user_name}
         and password = #{user.password}

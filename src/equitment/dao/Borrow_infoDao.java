@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface Borrow_infoDao {
-    List<Borrow_infoDao> findBorrow_infoList(@Param("info")Borrow_info info);
+    List<Borrow_info> findBorrow_infoList(@Param("info")Borrow_info info);
     Borrow_info findBorrowInfoByID(int id);
     Integer addBorrowInfo(@Param("info") Borrow_info info);
     Integer deleteBorrowInfo(int id);
