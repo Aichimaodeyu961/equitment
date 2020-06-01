@@ -1,19 +1,30 @@
 package equitment.pojo;
 
+import cn.hutool.core.date.DateUtil;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class Equit {
 
-    private int equit_id;
+    private Integer equit_id;
     private String equit_name;
-    private int equit_num;
-    private long createDate;
+    private Integer equit_num;
+    private Long createDate;
     private String createDateStr;
-    private int create_user_id;
+    private Integer create_user_id;
     private User user;
-    private long updateDate;
+    private Long updateDate;
     private String updateDateStr;
-    private int update_user_id;
+    private Integer update_user_id;
     private User update_user;
+
+    public String getCreateDateStr(){
+        return DateUtil.format(new Date(createDate),"yyyy-MM-dd HH:mm:ss");
+    }
+
+    public String getUpdateDateStr(){
+        return updateDate!=null?DateUtil.format(new Date(updateDate),"yyyy-MM-dd HH:mm:ss"):null;
+    }
 }

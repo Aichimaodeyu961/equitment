@@ -8,66 +8,69 @@
         <result property="password" column="password"/>
         <result property="createDate" column="createDate"/>
         <result property="role_id" column="role_id"/>
-        <result property="userstatus_id" column="userstatus_id"/>
+        <result property="userStatus" column="userstatus"/>
         <association property="role" javaType="role" column="role_id" select="equitment.dao.RoleDao.findRoleByID" fetchType="lazy"/>
-        <association property="userStatus" javaType="userStatus" column="userStatus_id" select="equitment.dao.UserStatusDao.findUserStatusByID" fetchType="lazy"/>
     </resultMap>
 
     <select id="login" resultType="user" parameterType="user">
-        select * from USER
-        where username = #{user.username}
+        select * from userinfo
+        where user_name = #{user.user_name}
         and password = #{user.password}
+        and userstatus = 1
     </select>
 
     <select id="findAll" resultMap="userMap" parameterType="user">
-        select user_id,user_name,password,createDate,role_id,userstatus_id
-        from user
+        select user_id,user_name,password,createDate,role_id,userstatus
+        from userinfo
         <if test="user!=null">
 
             <where>
-                <if test="user.username!=null and user.username != '' ">
-                    and username like '%'+${user.username}+'%'
+                <if test="user.user_id!=null">
+                    and user_id = #{user.user_id}
+                </if>
+                <if test="user.user_name!=null and user.user_name != '' ">
+                    and user_name like '%${user.user_name}%'
                 </if>
                 <if test="user.role_id!=null">
                     and role_id = #{user.role_id}
                 </if>
-                <if test="user.userstatus_id != null ">
-                    and userstatus_id = #{user.userstatus_id}
+                <if test="user.userStatus != null ">
+                    and userstatus = #{user.userStatus}
                 </if>
             </where>
         </if>
     </select>
 
     <select id="findUserByID" parameterType="Integer" resultMap="userMap">
-        select user_id,user_name,password,createDate,role_id,userstatus_id
-        from user
-        where userid = #{userid}
+        select user_id,user_name,password,createDate,role_id,userstatus
+        from userinfo
+        where user_id = #{id}
     </select>
 
-    <delete id="deleteUser" parameterType="Integer">
-        delete from user
-        where userid = #{userid}
-    </delete>
+
+    <update id="deleteUser" parameterType="Integer">
+        update userinfo
+        set userstatus = 0
+        where user_id = #{id}
+    </update>
+
 
     <insert id="addUser" parameterType="user">
-        insert into user(user_id,user_name,password,createDate,role_id,userStatus_id)
-        values(#{user.user_id},#{user.user_name},#{user.password},#{user.createDate},#{user.role_id},#{user.userStatus_id})
+        insert into userinfo(user_id,user_name,password,createDate,role_id,userStatus)
+        values(user_seq.nextval,#{user.user_name},#{user.password},#{user.createDate},#{user.role_id},#{user.userStatus})
     </insert>
 
     <update id="updateUser" parameterType="user">
-        update user
+        update userinfo
         <set>
-            <if test="user.username!=null and user.username!= '' ">
-                username = #{user.username},
+            <if test="user.user_name!=null and user.user_name!= '' ">
+                user_name = #{user.user_name},
             </if>
             <if test="user.password!=null and user.password!='' ">
                 password = #{user.password},
             </if>
             <if test="user.role_id != null ">
                 role_id = #{user.role_id},
-            </if>
-            <if test="user.userStatus_id!=null">
-                userStatus_id = #{user.userStatus_id},
             </if>
         </set>
         where user_id = #{user.user_id}

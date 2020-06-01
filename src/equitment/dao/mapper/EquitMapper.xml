@@ -4,8 +4,9 @@
 <mapper namespace="equitment.dao.EquitDao">
 
     <select parameterType="equit" id="findEquitList" resultMap="equitMap">
-        select equit_id,equit_name,equit_num,createDate,create_uesr_id,updateDate,update_user_id
+        select equit_id,equit_name,equit_num,createDate,create_user_id,updateDate,update_user_id
         from equit
+        <if test="equit!=null">
         <where>
 
             <if test="equit.equit_id!=null">
@@ -15,7 +16,13 @@
             <if test="equit.equit_name!=null and equit.equit_name != '' ">
                and  equit_name = #{equit.equit_name}
             </if>
+
+            <if test="equit.create_user_id">
+                and create_uesr_id = #{equit.create_user_id}
+            </if>
+
         </where>
+        </if>
     </select>
 
     <resultMap id="equitMap" type="equit">
@@ -24,14 +31,15 @@
         <result property="equit_num" column="equit_num"/>
         <result column="createDate" property="createDate"/>
         <result property="create_user_id" column="create_user_id"/>
-        <association property="user" javaType="user" column="create_user_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
+
         <result column="updateDate" property="updateDate"/>
         <result property="update_user_id" column="update_user_id"/>
+        <association property="user" javaType="user" column="create_user_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
         <association property="user" javaType="user" column="update_user_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
     </resultMap>
 
     <select id="findEquitByID" parameterType="Integer" resultMap="equitMap">
-        select equit_id,equit_name,equit_num,createDate,create_uesr_id,updateDate,update_user_id
+        select equit_id,equit_name,equit_num,createDate,create_user_id,updateDate,update_user_id
         from equit
         where equit_id = #{id}
     </select>
@@ -50,20 +58,30 @@
         update equit
         <set>
             <if test="equit.equit_name!=null and equit.equit_name != '' ">
-                equit_name = #{equit.equit_name}
+                equit_name = #{equit.equit_name},
             </if>
             <if test="equit.equit_num != null ">
-                equit.num = #{equit.equit_num}
+                equit.num = #{equit.equit_num},
             </if>
             <if test="equit.updateDate!=null and equit.updateDate!='' ">
-                updateDate = #{equit.updateDate}
+                updateDate = #{equit.updateDate},
             </if>
 
             <if test="equit.update_user_id!=null">
-                update_user_date = #{equit.update_user_id}
+                update_user_id = #{equit.update_user_id},
             </if>
         </set>
         where equit_id = #{equit.equit_id}
     </update>
 
+    <update id="borrowEquit">
+        update equit
+        set equit_num = equit_num - #{num}
+        where equit_id = #{id}
+    </update>
+    <update id="backEquit">
+        update equit
+        set equit_num = equit_num + #{num}
+        where equit_id = #{id}
+    </update>
 </mapper>

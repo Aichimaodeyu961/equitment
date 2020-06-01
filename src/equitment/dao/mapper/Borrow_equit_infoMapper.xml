@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="equitment.dao.Borrow_equit_infoDao">
+
+      <resultMap id="borrow_equitMap" type="borrow_equit_info">
+          <id property="borrow_equit_id" column="borrow_equit_id"/>
+          <result column="borrow_equit_info_id" property="borrow_equit_info_id"/>
+          <result column="equit_id" property="equit_id"></result>
+
+          <result column="equit_num" property="equit_num"/>
+          <association property="equit" javaType="equit" column="equit_id" fetchType="lazy" select="equitment.dao.EquitDao.findEquitByID"/>
+      </resultMap>
+
+    <select  parameterType="Long" id="findBorrowEquitInfo" resultMap="borrow_equitMap">
+        select * from borrow_equit_info
+        where borrow_equit_info_id = #{id}
+    </select>
+
+    <insert id="addBorrow_equit_info" parameterType="borrow_equit_info">
+        insert into borrow_equit_info(borrow_equit_id,borrow_equit_info_id,equit_id,equit_num)
+        values(borrow_equit_info_seq.nextval,#{info.borrow_equit_id},#{info.equit_id},#{info.equit_num})
+    </insert>
+
+    <delete id="deleteBorrow_equit_info" parameterType="Integer">
+        delete  borrow_equit_info
+        where borrow_equit_info_id = #{id}
+    </delete>
+
+</mapper>

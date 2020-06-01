@@ -11,7 +11,7 @@
                  <if test="role.role_id!=null">
                      and role_id = #{role.role_id}
                  </if>
-                 <if test="role.role_name!=null $$ role.role_name!=''">
+                 <if test="role.role_name!=null and role.role_name!=''">
                      and role_name = #{role.role_name}
                  </if>
              </where>
@@ -19,7 +19,7 @@
     </select>
 
     <select id="findRoleByID" parameterType="Integer" resultType="role">
-        select roleid,rolename
+        select role_id,role_name
         from role
         where role_id = #{id}
     </select>

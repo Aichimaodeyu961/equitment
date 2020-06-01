@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="equitment.dao.Borrow_infoDao">
+
+    <resultMap id="infoMap" type="borrow_info">
+        <id property="borrow_id" column="borrow_id"></id>
+        <result column="user_id" property="user_id"></result>
+
+        <result column="borrow_equit_info_id" property="borrow_equit_info_id"/>
+
+        <result column="borrow_num" property="borrow_num"/>
+        <result column="borrow_status" property="borrow_status"/>
+        <result column="borrow_date" property="borrow_date"/>
+        <result column="operate_id" property="operate_id"/>
+
+        <result column="should_back_date" property="should_back_date"/>
+        <result property="back_date" column="back_date"/>
+        <association property="operater" javaType="user" column="operate_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
+        <association property="user" javaType="user" column="user_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
+        <collection property="borrow_equit_info"  javaType="java.util.List" ofType="borrow_equit_info" column="borrow_equit_info_id" select="equitment.dao.Borrow_equit_infoDao.findBorrowEquitInfo" fetchType="lazy"/>
+    </resultMap>
+
+    <select id="findBorrow_infoList" resultMap="infoMap" parameterType="borrow_info">
+        select borrow_id,user_id,borrow_equit_info_id,borrow_num,borrow_status,borrow_date,operate_id,should_back_date,back_date
+        from borrow_info
+        <if test="info!=null">
+            <where>
+                <if test="info.user_id!=null">
+                    and user_id = #{info.user_id}
+                </if>
+                <if test="info.borrow_status!=null and info.borrow_status!=''">
+                    and borrow_status = #{info.borrow_status}
+                </if>
+                <if test="info.operate_id!=null">
+                    and operate_id = #{info.operate_id}
+                </if>
+            </where>
+        </if>
+    </select>
+
+    <select id="findBorrowInfoByID" resultMap="infoMap" parameterType="Integer">
+        select borrow_id,user_id,borrow_equit_info_id,borrow_num,borrow_status,borrow_date,operate_id,should_back_date,back_date
+        from borrow_info
+        where borrow_id = #{id}
+    </select>
+
+    <delete id="deleteBorrowInfo" parameterType="Integer">
+        delete from borrow_info
+        where borrow_id = #{id}
+    </delete>
+
+    <update id="updateBorrowInfo" parameterType="borrow_info">
+        update borrow_info
+        <set>
+            <if test="info.borrow_status!=null and info.borrow_status!='' ">
+                borrow_status = #{info.borrow_status},
+            </if>
+            <if test="info.back_date!=null">
+                back_date = #{info.back_date}
+            </if>
+        </set>
+        where borrow_id = #{info.borrow_id}
+    </update>
+
+    <insert id="addBorrowInfo" parameterType="borrow_info">
+        insert into borrow_info(borrow_id,user_id,borrow_equit_info_id,borrow_num,borrow_status,borrow_date,operate_id,should_back_date)
+        values(borrow_info_seq.nextval,#{info.user_id},#{info.borrow_equit_info_id},#{info.borrow_num},'已预定',#{info.borrow_date},#{info.operate_id},#{info.should_back_date})
+    </insert>
+
+</mapper>

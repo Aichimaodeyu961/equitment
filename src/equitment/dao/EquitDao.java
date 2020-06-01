@@ -1,7 +1,6 @@
 package equitment.dao;
 
 import equitment.pojo.Equit;
-import equitment.pojo.UserStatus;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,7 +10,11 @@ public interface EquitDao {
 
     Equit findEquitByID(int id);
 
-    Integer addEquit(@Param("userStatus") Equit equit);
+    Integer addEquit(@Param("equit") Equit equit);
     Integer deleteEquit(int id);
-    Integer updateEquit(@Param("userStatus") Equit equit);
+    Integer updateEquit(@Param("equit") Equit equit);
+
+    Integer borrowEquit(@Param("id")Integer id,@Param("num")Integer num);
+    Integer backEquit(@Param("id")Integer id,@Param("num")Integer num);
+
 }
