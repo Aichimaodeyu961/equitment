@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="equitment.dao.RoleDao">
+
+    <select id="findRoles" resultType="role" parameterType="role">
+         select r.role_id,r.role_name
+         from role r
+         <if test="role!=null">
+             <where>
+                 <if test="role.role_id!=null">
+                     and role_id = #{role.role_id}
+                 </if>
+                 <if test="role.role_name!=null $$ role.role_name!=''">
+                     and role_name = #{role.role_name}
+                 </if>
+             </where>
+         </if>
+    </select>
+
+    <select id="findRoleByID" parameterType="Integer" resultType="role">
+        select roleid,rolename
+        from role
+        where role_id = #{id}
+    </select>
+
+    <insert id="addRole" parameterType="role">
+        insert into role(role_id,role_name)
+        values(role_seq.nextval,#{role.role_name})
+    </insert>
+
+    <delete id="deleteRole" parameterType="Integer">
+        delete from role
+        where role_id = #{role_id}
+    </delete>
+
+    <update id="updateRole" parameterType="role">
+        update role
+        set role_name = #{role.role_name}
+        where role_id = #{role.role_id}
+    </update>
+
+</mapper>

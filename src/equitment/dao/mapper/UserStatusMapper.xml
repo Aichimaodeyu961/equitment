@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="equitment.dao.UserStatusDao">
+
+    <select parameterType="userStatus" id="findUserStatusList" resultType="userStatus">
+        select userstatus_id,userstatus_name
+        from userstatus
+        <if test="userStatus!=null">
+            <where>
+                <if test="userStatus.userStatus_id!=null">
+                    and userStatus_id = #{userStatus.userStatus_id}
+                </if>
+                <if test="userStatus.userStatus_name!=null and userStatus.userStatus_name!='' ">
+                    and userStatus_name = #{userStatus.userStatus_name}
+                </if>
+            </where>
+        </if>
+    </select>
+
+    <select id="findUserStatusByID" parameterType="Integer" resultType="userStatus">
+        select userstatus_id,userstatus_name
+        from userstatus
+        where userstatus_id = #{id}
+    </select>
+
+    <insert id="addUserStatus" parameterType="userStatus">
+        insert into userstatus(userstatus_id,userstatus_name)
+        values(userstatus_seq.nextval,#{userstatus.userstatus_name})
+    </insert>
+
+    <delete id="deleteUserStatus" parameterType="Integer">
+        delete from userstatus
+        where userStatus_id = #{userStatus_id}
+    </delete>
+
+    <update id="updateUserStatus" parameterType="userStatus">
+        update userStatus
+        set userStatus_name = #{userStatus.userStatus_name}
+        where userStatus_id = #{userStatus.userStatus_id}
+    </update>
+
+</mapper>

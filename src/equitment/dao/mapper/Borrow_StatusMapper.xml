@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="equitment.dao.Borrow_StatusDao">
+
+    <select parameterType="borrow_Status" id="findBorrow_StatusList" resultType="borrow_Status">
+        select borrow_Status_id,borrow_Status_name
+        from borrow_Status
+        <if test="borrow_Status!=null">
+            <where>
+                <if test="borrow_Status.borrow_Status_id!=null">
+                    and borrow_Status_id = #{borrow_Status.borrow_Status_id}
+                </if>
+                <if test="borrow_Status.borrow_Status_name!=null and borrow_Status.borrow_Status_name!='' ">
+                    and borrow_Status_name = #{borrow_Status.borrow_Status_name}
+                </if>
+            </where>
+        </if>
+    </select>
+
+    <select id="findUserStatusByID" parameterType="Integer" resultType="borrow_Status">
+        select borrow_Status_id,borrow_Status_name
+        from borrow_Status
+        where borrow_Status_id = #{id}
+    </select>
+
+    <insert id="addBorrow_Status" parameterType="borrow_Status">
+        insert into borrow_Status(borrow_Status_id,borrow_Status_name)
+        values(borrow_Status_seq.nextval,#{borrow_Status.borrow_Status_name})
+    </insert>
+
+    <delete id="deleteBorrow_Status" parameterType="Integer">
+        delete from borrow_Status
+        where borrow_Status_id = #{borrow_Status_id}
+    </delete>
+
+    <update id="updateBorrow_Status" parameterType="borrow_Status">
+        update borrow_Status
+        set borrow_Status_name = #{borrow_Status.borrow_Status_name}
+        where borrow_Status_id = #{borrow_Status.borrow_Status_id}
+    </update>
+
+</mapper>
