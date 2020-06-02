@@ -22,7 +22,6 @@
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/mchange-commons-java-0.2.11.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/mybatis-3.5.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/mybatis-spring-2.0.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-8.0.19.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/pagehelper-5.1.9.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/quartz-1.8.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/servlet-api.jar!/" />
