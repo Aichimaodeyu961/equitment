@@ -53,6 +53,9 @@
     <update id="updateBorrowInfo" parameterType="borrow_info">
         update borrow_info
         <set>
+            <if test="info.operate_id!=null">
+                operate_id = #{info.operate_id}
+            </if>
             <if test="info.borrow_status!=null and info.borrow_status!='' ">
                 borrow_status = #{info.borrow_status},
             </if>

@@ -5,6 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import equitment.dao.*;
 import equitment.pojo.*;
+import equitment.service.BorrowInfoService;
 import equitment.service.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,20 @@ public class test {
 
 
     @Resource
+    private BorrowInfoService borrowInfoService;
+
+    @Test
+    public void ServiceTest(){
+        System.out.println(borrowInfoService.findBorrowInfoList(1,1, null));
+    }
+
+    @Resource
     private UserDao userDao;
+
+    @Test
+    public void UserDaoTest(){
+        System.out.println(userDao.findAll(null));
+    }
 
     @Resource
     private EquitDao equitDao;

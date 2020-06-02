@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 
 ">
-        <context:component-scan base-package="equitment.service"/>
+        <context:component-scan base-package="equitment.service,equitment.util"/>
         <aop:aspectj-autoproxy/>
 
         <context:property-placeholder location="classpath:config/db.properties"/>
