@@ -9,7 +9,9 @@ import equitment.dao.Borrow_infoDao;
 import equitment.dao.EquitDao;
 import equitment.pojo.Borrow_equit_info;
 import equitment.pojo.Borrow_info;
+import equitment.pojo.User;
 import equitment.service.BorrowInfoService;
+import equitment.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,13 +49,28 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
         return list;
     }
 
+    @Resource
+    private UserService userService;
+
     @Transactional(propagation = Propagation.SUPPORTS,readOnly = true)
     @Override
     public PageInfo<Borrow_info> findBorrowInfoList(int pageNum, int pageSize , Borrow_info info) {
+        if(info.getUser()!=null && info.getUser().getUser_name()!=null){
+            User user = userService.findUserByName(info.getUser().getUser_name());
+            if(user!=null){
+                info.setUser_id(user.getUser_id());
+            }
+        }
         PageHelper.startPage(pageNum,pageSize);
         List<Borrow_info> list = borrow_infoDao.findBorrow_infoList(info);
         PageInfo<Borrow_info> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    public static void main(String[] args) {
+        String str = "2,3;";
+        BorrowInfoServiceImpl s = new BorrowInfoServiceImpl();
+        System.out.println(s.messageHandler(1L,str));
     }
 
 
@@ -84,7 +101,9 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
 
     @Override
     public Integer backEquit(Borrow_info info) {
+        Integer operate_id = info.getOperate_id();
         info = borrow_infoDao.findBorrowInfoByID(info.getBorrow_id());
+        info.setOperate_id(operate_id);
         info.setBack_date(new Date().getTime());
         info.setBorrow_status("已归还");
         Long infoid = info.getBorrow_equit_info_id();
@@ -96,15 +115,25 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
     }
 
 
+
+
     @Override
     public Integer deleteBorrowInfo(Borrow_info info) {
+        Integer operate_id = info.getOperate_id();
         info = borrow_infoDao.findBorrowInfoByID(info.getBorrow_id());
+        info.setOperate_id(operate_id);
         info.setBorrow_status("已撤销");
-        long id = info.getBorrow_equit_info_id();
-        List<Borrow_equit_info> list = borrow_equit_infoDao.findBorrowEquitInfo(id);
-        for(Borrow_equit_info cur: list){
-            equitDao.backEquit(cur.getEquit_id(),cur.getEquit_num());
+        Long infoid = info.getBorrow_equit_info_id();
+        List<Borrow_equit_info> list = borrow_equit_infoDao.findBorrowEquitInfo(infoid);
+        for(Borrow_equit_info e : list){
+            equitDao.backEquit(e.getEquit_id(),e.getEquit_num());
         }
+        return borrow_infoDao.updateBorrowInfo(info);
+    }
+
+    @Override
+    public Integer outEquit(Borrow_info info) {
+        info.setBorrow_status("已领取");
         return borrow_infoDao.updateBorrowInfo(info);
     }
 }

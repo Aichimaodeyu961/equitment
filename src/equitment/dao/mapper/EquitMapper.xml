@@ -23,6 +23,7 @@
 
         </where>
         </if>
+        order by equit_id
     </select>
 
     <resultMap id="equitMap" type="equit">

@@ -8,6 +8,7 @@ import java.util.List;
 public interface UserDao {
     User login(@Param("user")User user);
     List<User>  findAll(@Param("user") User user);
+    User findUserByName(String name);
     User findUserByID(int id);
     Integer addUser(@Param("user")User user);
     Integer deleteUser(int id);
