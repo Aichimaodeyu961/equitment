@@ -55,7 +55,7 @@
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user-o"></i>用户注册</h3>
             <div class="form-group">
                 <label class="control-label">用户名</label>
-                <input class="form-control" name="username" type="text" placeholder="请输入用户名" required>
+                <input class="form-control" name="user_name" type="text" placeholder="请输入用户名" required>
             </div>
             <div class="form-group">
                 <label class="control-label">密码</label>

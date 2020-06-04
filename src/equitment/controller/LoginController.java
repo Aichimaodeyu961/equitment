@@ -5,6 +5,8 @@ import equitment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -18,19 +20,21 @@ public class LoginController {
 
     @RequestMapping("")
     public String toLogin(){
-        return "login";
+        return "login2";
     }
 
     @RequestMapping("login")
-    public ModelAndView doLogin(User user){
+    public ModelAndView doLogin(HttpSession session, User user){
         ModelAndView mv=new ModelAndView();
         User loginUser=userService.login(user);
         if(loginUser==null){
             mv.addObject("errormsg","用户名或密码不正确");
-            mv.setViewName("login");
+            mv.setViewName("login2");
         }else {
             mv.addObject("loginUser",loginUser);
-            mv.setViewName("index");
+            session.setAttribute("user",loginUser);
+            mv.setViewName("index2");
+
         }
         return mv;
     }
@@ -44,6 +48,6 @@ public class LoginController {
         //使session失效
         session.invalidate();
         //跳转到登录界面
-        return "login";
+        return "login2";
     }
 }
