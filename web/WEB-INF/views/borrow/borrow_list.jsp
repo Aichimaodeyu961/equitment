@@ -98,6 +98,7 @@
 </div>
 <script>
     function initInput() {
+
         $('#borrow_id').val('')
         $('#user_id').val('')
         $('#user_name').val('')
