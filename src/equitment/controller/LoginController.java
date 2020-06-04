@@ -32,7 +32,7 @@ public class LoginController {
             mv.setViewName("login2");
         }else {
             mv.addObject("loginUser",loginUser);
-            session.setAttribute("user",loginUser);
+
             mv.setViewName("index2");
 
         }

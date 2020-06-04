@@ -62,6 +62,7 @@
                                     <li><a href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')">用户管理</a></li>
                                     <li><a href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')">角色管理</a></li>
                                 </ul>
+
                             </li>
                             <li <c:if test="${loginUser.role_id==2}">style="display: none" </c:if>><a><i class="fa fa-edit"></i> 业务模块 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
