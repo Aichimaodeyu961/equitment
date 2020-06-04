@@ -57,11 +57,11 @@
                 <li><a class="treeview-item" href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> 角色管理</a></li>
             </ul>
         </li>
-        <li <c:if test="${loginUser.role_id==2}">style="display: none" </c:if> class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">业务模块</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">业务模块</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li <c:if test="${loginUser.role_id==4}">style="display: none" </c:if><a class="treeview-item" href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')"><i class="icon fa fa-circle-o"></i> 器材管理</a></li>
-                <li <c:if test="${loginUser.role_id==3}">style="display: none" </c:if>><a class="treeview-item" href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')"><i class="icon fa fa-circle-o"></i> 生成租借单</a></li>
-                <li <c:if test="${loginUser.role_id==4}">style="display: none" </c:if>><a class="treeview-item" href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')"><i class="icon fa fa-circle-o"></i> 借单管理</a></li>
+                <li <c:if test="${loginUser.role_id==3 or loginUser.role_id==2}">style="display: none" </c:if><a class="treeview-item" href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')"><i class="icon fa fa-circle-o"></i> 器材管理</a></li>
+                <li <c:if test="${loginUser.role_id==3 or loginUser.role_id==2}">style="display: none" </c:if>><a class="treeview-item" href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')"><i class="icon fa fa-circle-o"></i> 生成租借单</a></li>
+                <li <c:if test="${loginUser.role_id==4 or loginUser.role_id==2}">style="display: none" </c:if>><a class="treeview-item" href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')"><i class="icon fa fa-circle-o"></i> 借单管理</a></li>
 
             </ul>
         </li>

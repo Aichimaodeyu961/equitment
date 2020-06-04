@@ -16,4 +16,5 @@ public interface BorrowInfoService {
     Integer  borrowEquit(String info,Integer userid);
     Integer  backEquit(Borrow_info info);
     Integer  deleteBorrowInfo(Borrow_info info);
+    Integer  outEquit(Borrow_info info);
 }

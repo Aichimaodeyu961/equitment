@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -22,15 +23,16 @@ public class LoginController {
     }
 
     @RequestMapping("login")
-    public ModelAndView doLogin(User user){
+    public ModelAndView doLogin(User user, HttpServletRequest request){
+        request.getSession().setAttribute("basePath",request.getContextPath());
         ModelAndView mv=new ModelAndView();
         User loginUser=userService.login(user);
         if(loginUser==null){
             mv.addObject("errormsg","用户名或密码不正确");
             mv.setViewName("login");
         }else {
-            mv.addObject("loginUser",loginUser);
-            mv.setViewName("index");
+            request.getSession().setAttribute("loginUser",loginUser);
+            mv.setViewName("test");
         }
         return mv;
     }

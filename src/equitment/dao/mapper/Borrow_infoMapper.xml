@@ -26,17 +26,24 @@
         from borrow_info
         <if test="info!=null">
             <where>
+                <if test="info.borrow_id!=null">
+                    and borrow_id = #{info.borrow_id}
+                </if>
+
                 <if test="info.user_id!=null">
                     and user_id = #{info.user_id}
                 </if>
+
                 <if test="info.borrow_status!=null and info.borrow_status!=''">
                     and borrow_status = #{info.borrow_status}
                 </if>
+
                 <if test="info.operate_id!=null">
                     and operate_id = #{info.operate_id}
                 </if>
             </where>
         </if>
+        order by borrow_id
     </select>
 
     <select id="findBorrowInfoByID" resultMap="infoMap" parameterType="Integer">
@@ -54,21 +61,21 @@
         update borrow_info
         <set>
             <if test="info.operate_id!=null">
-                operate_id = #{info.operate_id}
+                operate_id = #{info.operate_id},
             </if>
             <if test="info.borrow_status!=null and info.borrow_status!='' ">
                 borrow_status = #{info.borrow_status},
             </if>
             <if test="info.back_date!=null">
-                back_date = #{info.back_date}
+                back_date = #{info.back_date},
             </if>
         </set>
         where borrow_id = #{info.borrow_id}
     </update>
 
     <insert id="addBorrowInfo" parameterType="borrow_info">
-        insert into borrow_info(borrow_id,user_id,borrow_equit_info_id,borrow_num,borrow_status,borrow_date,operate_id,should_back_date)
-        values(borrow_info_seq.nextval,#{info.user_id},#{info.borrow_equit_info_id},#{info.borrow_num},'已预定',#{info.borrow_date},#{info.operate_id},#{info.should_back_date})
+        insert into borrow_info(borrow_id,user_id,borrow_equit_info_id,borrow_num,borrow_status,borrow_date,should_back_date)
+        values(borrow_info_seq.nextval,#{info.user_id},#{info.borrow_equit_info_id},#{info.borrow_num},'已预定',#{info.borrow_date},#{info.should_back_date})
     </insert>
 
 </mapper>

@@ -3,10 +3,11 @@ package equitment.pojo;
 import cn.hutool.core.date.DateUtil;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Equit {
+public class Equit implements Serializable {
 
     private Integer equit_id;
     private String equit_name;

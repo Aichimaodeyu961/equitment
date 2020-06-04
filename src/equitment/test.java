@@ -6,6 +6,7 @@ import cn.hutool.core.util.RandomUtil;
 import equitment.dao.*;
 import equitment.pojo.*;
 import equitment.service.BorrowInfoService;
+import equitment.service.EquitService;
 import equitment.service.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +22,15 @@ import java.util.Date;
 public class test {
 
     @Resource
+    private EquitService equitService;
+
+    @Test
+    public void equtiTest(){
+        System.out.println(equitService.findEquitList(1,1,null));
+    }
+
+
+    @Resource
     private RoleDao roleDao;
 
 
@@ -29,7 +39,8 @@ public class test {
 
     @Test
     public void ServiceTest(){
-        System.out.println(borrowInfoService.findBorrowInfoList(1,1, null));
+        int res = borrowInfoService.borrowEquit("3,50;4,50",2);
+        System.out.println(res);
     }
 
     @Resource
@@ -80,19 +91,22 @@ public class test {
 
     @Test
     public void equitTest(){
+        String [] queitname = {"弓箭","太极扇","太极球","剑"};
+        for(int i =0 ; i<4;i++) {
+            Equit equit = new Equit();
+            equit.setEquit_name(queitname[i]);
+            equit.setEquit_num(80);
+            equit.setCreateDate(new Date().getTime());
+            equit.setCreate_user_id(3);
+            System.out.println(equitDao.addEquit(equit));
 
-//        Equit equit = new Equit();
-//        equit.setEquit_name("足球");
-//        equit.setEquit_num(200);
-//        equit.setCreateDate(new Date().getTime());
-//        equit.setCreate_user_id(3);
-//        System.out.println(equitDao.addEquit(equit));
+        }
 //        Equit equit = new Equit();
 //        equit.setEquit_id(2);
 //        equit.setEquit_name("篮球1");
 //        equit.setUpdate_user_id(2);
 //        equit.setUpdateDate(new Date().getTime());
-        System.out.println(equitDao.deleteEquit(2));
+//        System.out.println(equitDao.deleteEquit(2));
     }
 
     @Test

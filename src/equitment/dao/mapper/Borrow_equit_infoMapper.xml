@@ -19,7 +19,7 @@
 
     <insert id="addBorrow_equit_info" parameterType="borrow_equit_info">
         insert into borrow_equit_info(borrow_equit_id,borrow_equit_info_id,equit_id,equit_num)
-        values(borrow_equit_info_seq.nextval,#{info.borrow_equit_id},#{info.equit_id},#{info.equit_num})
+        values(borrow_equit_info_seq.nextval,#{info.borrow_equit_info_id},#{info.equit_id},#{info.equit_num})
     </insert>
 
     <delete id="deleteBorrow_equit_info" parameterType="Integer">
