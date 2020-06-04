@@ -16,7 +16,7 @@
     <title>登录-欢迎访问体育器材管理系统</title>
     <style type="text/css">
         div.login-box.flipped{
-            height:390px;
+            height:450px;
         }
     </style>
 </head>
@@ -28,7 +28,7 @@
     <div class="logo">
         <h1>体育器材管理系统</h1>
     </div>
-    <div class="login-box">
+    <div class="login-box" >
         <form class="login-form" action="${pageContext.request.contextPath}/login/login" method="post">
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>登 录</h3>
             <div class="form-group">
@@ -66,21 +66,22 @@
                 <input class="form-control" name="repassword" type="password" placeholder="请保持两次密码一致" oninput="checkrePassword(this)" required>
             </div>
             <div class="form-group">
-                <label class="control-label">roleid</label>
-                <input class="form-control" name="roleid" type="text" placeholder="输入roleid" required>
-            </div>
-            <div class="form-group">
-                <label class="control-label">deptid</label>
-                <input class="form-control" name="deptid" type="text" placeholder="输入deptid" required>
-            </div>
-
-            <div class="form-group">
-                <div class="utility">
-                    <div class="animated-checkbox">
-                    </div>
-                    <p class="semibold-text mb-2"><a href="#" data-toggle="flip">去登录</a></p>
+                <label class="control-label">选择角色</label>
+                <select style="border: 2px solid #ced4da">
+                    <option value="4" selected disabled>教师</option>
+                </select>
+                <div class="animated-checkbox" style="float: right">
+                <a href="#" data-toggle="flip">去登录</a>
                 </div>
             </div>
+
+<%--            <div class="form-group">--%>
+<%--                <div class="utility">--%>
+<%--                    <div class="animated-checkbox">--%>
+<%--                    </div>--%>
+<%--                    <p class="semibold-text mb-2"><a href="#" data-toggle="flip">去登录</a></p>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="form-group btn-container">
                 <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-user-circle-o fa-lg fa-fw"></i>注册</button>
             </div>
