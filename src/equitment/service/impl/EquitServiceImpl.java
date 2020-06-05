@@ -22,4 +22,18 @@ public class EquitServiceImpl implements EquitService {
         List<Equit> list = equitDao.findEquitList(equit);
         return new PageInfo<Equit>(list);
     }
+
+    @Override
+    public PageInfo<Equit> findEquitListOnStatus(int pageNum, int pageSize, Equit equit) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Equit> list = equitDao.findEquitListOnStatus(equit);
+        return new PageInfo<Equit>(list);
+    }
+
+    @Override
+    public Integer deleteEquit(Integer equit_id) {
+        return equitDao.deleteEquit(equit_id);
+    }
+
+
 }

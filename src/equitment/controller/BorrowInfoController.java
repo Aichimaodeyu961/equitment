@@ -66,7 +66,7 @@ public class BorrowInfoController {
         mv.setViewName("borrow/equit");
         mv.addObject("uri",request.getRequestURL());
         mv.addObject("searchInfo",equit);
-        PageInfo<Equit> list = equitService.findEquitList(pageNum,pageSize,equit);
+        PageInfo<Equit> list = equitService.findEquitListOnStatus(pageNum,pageSize,equit);
         System.out.println(list);
         mv.addObject("pageInfo",list);
         return mv;

@@ -48,7 +48,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${loginUser.role.role_name=='超级管理员' or loginUser.role.role_name=='器材管理员'}">
-                                         <button class="btn btn-secondary" onclick="javascript:;">删除</button>
+                                         <button class="btn btn-secondary" onclick="deleteEquit(${item.equit_id})">删除</button>
                                          <button class="btn btn-secondary" onclick="javascript:;">修改</button>
                                     </c:when>
                                     <c:otherwise>
@@ -67,6 +67,19 @@
 </div>
 
 <script>
+
+    function deleteEquit(id) {
+       if(confirm('确认删除?')){
+           $.get('equit/delete',{equit_id:id},function (res) {
+              if(res.msg == 1){
+                  alert('删除成功')
+                  search();
+              }else {
+                  alert('删除失败')
+              }
+           })
+       }
+    }
 
     function search() {
         var url = '${uri}'

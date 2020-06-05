@@ -121,16 +121,17 @@ public class test {
 
     @Test
     public void equitTest(){
-        String [] queitname = {"弓箭","太极扇","太极球","剑"};
-        for(int i =0 ; i<4;i++) {
-            Equit equit = new Equit();
-            equit.setEquit_name(queitname[i]);
-            equit.setEquit_num(80);
-            equit.setCreateDate(new Date().getTime());
-            equit.setCreate_user_id(3);
-            System.out.println(equitDao.addEquit(equit));
-
-        }
+        System.out.println(equitDao.findEquitList(null));
+//        String [] queitname = {"弓箭","太极扇","太极球","剑"};
+//        for(int i =0 ; i<4;i++) {
+//            Equit equit = new Equit();
+//            equit.setEquit_name(queitname[i]);
+//            equit.setEquit_num(80);
+//            equit.setCreateDate(new Date().getTime());
+//            equit.setCreate_user_id(3);
+//            System.out.println(equitDao.addEquit(equit));
+//
+//        }
 //        Equit equit = new Equit();
 //        equit.setEquit_id(2);
 //        equit.setEquit_name("篮球1");
