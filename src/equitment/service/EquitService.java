@@ -8,3 +8,4 @@ public interface EquitService {
     PageInfo<Equit> findEquitListOnStatus(int pageNum , int pageSize , Equit equit);
     Integer deleteEquit(Integer equit_id);
 }
+

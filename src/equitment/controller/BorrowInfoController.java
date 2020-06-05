@@ -59,6 +59,7 @@ public class BorrowInfoController {
         return mv;
     }
 
+
     @RequestMapping("goBorrow")
     public ModelAndView goBorrow(@RequestParam(defaultValue = "1",required = false)int pageNum,@RequestParam(defaultValue = "10" , required = false)int pageSize , Equit equit,HttpServletRequest request){
         ModelAndView mv = new ModelAndView();

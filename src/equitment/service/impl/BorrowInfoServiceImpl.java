@@ -74,6 +74,7 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
     }
 
 
+
     @Override
     public Integer borrowEquit(String info , Integer userid) {
 

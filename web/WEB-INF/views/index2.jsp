@@ -73,7 +73,8 @@
                                     <li><a href="javascript:;" onclick="getBorrowList()">借单管理</a></li>
 <%--                                    <li><a href="form_wizards.html">Form Wizard</a></li>--%>
 <%--                                    <li><a href="form_upload.html">Form Upload</a></li>--%>
-<%--                                    <li><a href="form_buttons.html">Form Buttons</a></li>--%>
+<%--
+                          <li><a href="form_buttons.html">Form Buttons</a></li>--%>
                                 </ul>
                             </li>
                             <script src="js/borrow/borrow.js"></script>

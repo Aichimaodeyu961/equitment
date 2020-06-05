@@ -37,6 +37,7 @@ public class EquitController {
 
 
 
+
     @RequestMapping("delete")
     @ResponseBody
     public Map deleteEquit(Integer equit_id){

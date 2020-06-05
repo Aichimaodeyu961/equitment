@@ -15,6 +15,7 @@ public interface EquitDao {
     Integer deleteEquit(int id);
     Integer updateEquit(@Param("equit") Equit equit);
 
+
     Integer borrowEquit(@Param("id")Integer id,@Param("num")Integer num);
     Integer backEquit(@Param("id")Integer id,@Param("num")Integer num);
 

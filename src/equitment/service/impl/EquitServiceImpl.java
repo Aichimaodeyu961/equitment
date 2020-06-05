@@ -30,6 +30,7 @@ public class EquitServiceImpl implements EquitService {
         return new PageInfo<Equit>(list);
     }
 
+
     @Override
     public Integer deleteEquit(Integer equit_id) {
         return equitDao.deleteEquit(equit_id);

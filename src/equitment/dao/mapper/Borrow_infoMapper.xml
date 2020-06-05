@@ -21,6 +21,7 @@
         <collection property="borrow_equit_info"  javaType="java.util.List" ofType="borrow_equit_info" column="borrow_equit_info_id" select="equitment.dao.Borrow_equit_infoDao.findBorrowEquitInfo" fetchType="lazy"/>
     </resultMap>
 
+
     <select id="findBorrow_infoList" resultMap="infoMap" parameterType="borrow_info">
         select borrow_id,user_id,borrow_equit_info_id,borrow_num,borrow_status,borrow_date,operate_id,should_back_date,back_date
         from borrow_info

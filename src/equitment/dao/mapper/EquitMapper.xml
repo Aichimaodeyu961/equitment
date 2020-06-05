@@ -82,6 +82,7 @@
     </insert>
 
 
+
     <update id="deleteEquit" parameterType="Integer">
         update equit
         set status = 0
