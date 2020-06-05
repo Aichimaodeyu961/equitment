@@ -202,7 +202,7 @@
     </main>
 
 
-    <script src="js/borrow.js"></script>
+    <script src="js/borrow/borrow.js"></script>
 
     <script>
       function getEquitInfo() {

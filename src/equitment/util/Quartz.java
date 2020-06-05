@@ -34,8 +34,12 @@ public class Quartz {
 
     List<Borrow_info> list = new ArrayList<>();
 
+
+
+
     @Scheduled(cron = "0 */25 8-18 * * 1-5")
     public void scannerDB() {
+        System.out.println("开始扫描数据库 检查是否有超时");
         Borrow_info info = new Borrow_info();
         info.setBorrow_status("已预定");
         List<Borrow_info> e = borrow_infoDao.findBorrow_infoList(info);
@@ -43,7 +47,7 @@ public class Quartz {
         for (Borrow_info cur : e){
             if (cur.getShould_back_date()<t){
                 cur.setBorrow_status("超时");
-                long id = info.getBorrow_equit_info_id();
+                long id = cur.getBorrow_equit_info_id();
                 List<Borrow_equit_info> list = borrow_equit_infoDao.findBorrowEquitInfo(id);
                 for(Borrow_equit_info tt: list){
                     equitDao.backEquit(tt.getEquit_id(),tt.getEquit_num());
@@ -52,5 +56,6 @@ public class Quartz {
                 borrow_infoDao.updateBorrowInfo(cur);
             }
         }
+        System.out.println("扫描结束");
     }
 }

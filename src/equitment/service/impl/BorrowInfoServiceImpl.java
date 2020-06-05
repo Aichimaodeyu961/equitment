@@ -84,6 +84,7 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
         borrow_info.setBorrow_num(info.split(";").length);
         borrow_info.setBorrow_date(infoid);
         long sid = DateUtil.offsetHour(new Date(infoid),3).getTime();
+//        long sid = DateUtil.offsetSecond(new Date(infoid),30).getTime();
         borrow_info.setShould_back_date(sid);
         try{
             List<Borrow_equit_info> list = messageHandler(infoid,info);

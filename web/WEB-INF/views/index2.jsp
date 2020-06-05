@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="${basePath}/">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -64,16 +65,17 @@
                                 </ul>
 
                             </li>
-                            <li <c:if test="${loginUser.role_id==2}">style="display: none" </c:if>><a><i class="fa fa-edit"></i> 业务模块 <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-edit"></i> 业务模块 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li <c:if test="${loginUser.role_id==4}">style="display: none" </c:if>><a href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')">器材管理</a></li>
-                                    <li <c:if test="${loginUser.role_id==3}">style="display: none" </c:if>><a href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')">生成租借单</a></li>
-                                    <li <c:if test="${loginUser.role_id==4}">style="display: none" </c:if>><a href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')">借单管理</a></li>
+                                    <li><a href="javascript:;" onclick="getData('equit/getEquitList','','GET')">器材管理</a></li>
+                                    <li><a href="javascript:;" onclick="getEquitInfo()">教师借器材</a></li>
+                                    <li><a href="javascript:;" onclick="getBorrowList()">借单管理</a></li>
 <%--                                    <li><a href="form_wizards.html">Form Wizard</a></li>--%>
 <%--                                    <li><a href="form_upload.html">Form Upload</a></li>--%>
 <%--                                    <li><a href="form_buttons.html">Form Buttons</a></li>--%>
                                 </ul>
                             </li>
+                            <script src="js/borrow/borrow.js"></script>
 <%--                            <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>--%>
 <%--                                <ul class="nav child_menu">--%>
 <%--                                    <li><a href="general_elements.html">General Elements</a></li>--%>

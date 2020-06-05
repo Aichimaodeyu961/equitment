@@ -2,6 +2,7 @@ package equitment.controller;
 
 
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import equitment.pojo.Borrow_info;
 import equitment.pojo.Equit;
 import equitment.pojo.User;
@@ -34,21 +35,35 @@ public class BorrowInfoController {
     @Resource
     private UserService userService;
 
+
+    Map<String,Integer> map = new HashMap<>();
+
     @RequestMapping("getBorrowInfo")
     public ModelAndView getBorrowInfo(@RequestParam(defaultValue = "1",required = false)int pageNum, @RequestParam(defaultValue = "10",required = false)int pageSize, Borrow_info borrowInfo,HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
         mv.addObject("searchInfo",borrowInfo);
         PageInfo<Borrow_info> pageInfo = borrowInfoService.findBorrowInfoList(pageNum,pageSize,borrowInfo);
-        mv.setViewName("borrow/borrow_list");
+        System.out.println(pageInfo);
+        mv.setViewName("borrow/list");
         mv.addObject("uri",request.getRequestURL());
         mv.addObject("pageInfo",pageInfo);
+        return mv;
+    }
+
+    @RequestMapping("test")
+    public ModelAndView testt(Borrow_info info){
+        ModelAndView mv = new ModelAndView();
+        PageInfo<Borrow_info> pageInfo = borrowInfoService.findBorrowInfoList(1,10,info);
+        mv.addObject("pageInfo",pageInfo);
+        mv.setViewName("borrow/list");
         return mv;
     }
 
     @RequestMapping("goBorrow")
     public ModelAndView goBorrow(@RequestParam(defaultValue = "1",required = false)int pageNum,@RequestParam(defaultValue = "10" , required = false)int pageSize , Equit equit,HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("borrow/borrowEquit");
+//        mv.setViewName("borrow/borrowEquit");
+        mv.setViewName("borrow/equit");
         mv.addObject("uri",request.getRequestURL());
         mv.addObject("searchInfo",equit);
         PageInfo<Equit> list = equitService.findEquitList(pageNum,pageSize,equit);
@@ -58,7 +73,7 @@ public class BorrowInfoController {
     }
 
 
-    Map<String,Integer> map = new HashMap<>();
+
 
 
 

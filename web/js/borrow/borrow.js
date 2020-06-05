@@ -1,7 +1,11 @@
 function  getBorrowList() {
     $.get('borrow/getBorrowInfo',function (res) {
-        $("#maincontain").html(res)
+        $("#insert").html(res)
     })
+}
+
+function getEquitInfo() {
+    getData('borrow/goBorrow','','GET')
 }
 
 function getData(url , data , method) {
@@ -10,7 +14,7 @@ function getData(url , data , method) {
         data:data,
         method:method,
         success:res=>{
-            $('#maincontain').html(res)
+            $('#insert').html(res)
         },
         error:res=>{
             alert('err')
@@ -48,6 +52,7 @@ function equitArr(box , id , max) {
     }
 }
 
+
 function numArr(num1 , id , max) {
 
     var numValue = num1.value
@@ -76,3 +81,4 @@ function borrow(){
         }
     })
 }
+
