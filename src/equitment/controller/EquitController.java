@@ -19,6 +19,8 @@ public class EquitController {
     @Resource
     private EquitService equitService;
 
+
+
     @RequestMapping("getEquitList")
     public ModelAndView getEquitList(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10" ,required = false)int pageSize, Equit equit, HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
