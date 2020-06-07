@@ -13,7 +13,9 @@
                             <div class="input-group">
                                 <input type="text" id="equit_name" name="equit_name" value="${searchInfo.equit_name}" class="form-control" placeholder="equit_name">
                                 <span class="input-group-btn"><button class="btn btn-secondary" type="button" onclick="search()">查询</button></span>
-                                <span class="input-group-btn"><button class="btn btn-secondary" type="button" onclick="addEquit()">添加器材</button></span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="button" onclick="addEquit()">添加器材</button>
+                               </span>
                             </div>
                         </div>
                     </div>
@@ -49,7 +51,9 @@
                                 <c:choose>
                                     <c:when test="${loginUser.role.role_name=='超级管理员' or loginUser.role.role_name=='器材管理员'}">
                                          <button class="btn btn-secondary" onclick="deleteEquit(${item.equit_id})">删除</button>
-                                         <button class="btn btn-secondary" onclick="javascript:;">修改</button>
+<%--                                         <button class="btn btn-secondary" onclick="javascript:;">修改</button>--%>
+
+                                            <button class="btn btn-secondary" onclick="update(${item.equit_id})">修改</button>
                                     </c:when>
                                     <c:otherwise>
                                         无权限操作
@@ -67,7 +71,14 @@
 </div>
 
 <script>
+    function update(id){
+        getData('equit/goUpdate',{equit_id:id},'GET')
+    }
 
+
+    function addEquit() {
+        getData('equit/goUpdate','','GET')
+    }
     function deleteEquit(id) {
        if(confirm('确认删除?')){
            $.get('equit/delete',{equit_id:id},function (res) {
