@@ -52,7 +52,28 @@ public class LoginController {
         return "login";
     }
 
-
+    @ResponseBody
+    @RequestMapping("rename")
+    public Map<String,Integer> reName(String user_name){
+        Map<String,Integer> map=new HashMap<>();
+        if(userService.findUserByName(user_name)!=null){
+            map.put("code",1);
+        }else {
+            map.put("code",0);
+        }
+        return map;
+    }
+    @RequestMapping("register")
+    @ResponseBody
+    public Map<String,Integer> doRegister(User user){
+        Map<String,Integer> map=new HashMap<>();
+        if(userService.register(user)==1){
+            map.put("code",1);
+        }else {
+            map.put("code",0);
+        }
+        return map;
+    }
 
 
 }
