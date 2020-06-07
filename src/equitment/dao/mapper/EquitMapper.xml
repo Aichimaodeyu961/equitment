@@ -4,7 +4,7 @@
 <mapper namespace="equitment.dao.EquitDao">
 
     <select parameterType="equit" id="findEquitList" resultMap="equitMap">
-        select equit_id,equit_name,equit_num,createDate,create_user_id,updateDate,update_user_id
+        select equit_id,equit_name,equit_num,createDate,create_user_id,updateDate,update_user_id,status
         from equit
         <if test="equit!=null">
         <where>
@@ -20,8 +20,32 @@
             <if test="equit.create_user_id">
                 and create_uesr_id = #{equit.create_user_id}
             </if>
-
         </where>
+        </if>
+        order by equit_id
+    </select>
+
+    <select parameterType="equit" id="findEquitListOnStatus" resultMap="equitMap">
+        select equit_id,equit_name,equit_num,createDate,create_user_id,updateDate,update_user_id,status
+        from equit
+        <if test="equit!=null">
+            <where>
+
+                <if test="equit.equit_id!=null">
+                    and equit_id = #{equit.equit_id}
+                </if>
+
+                <if test="equit.equit_name!=null and equit.equit_name != '' ">
+                    and  equit_name = #{equit.equit_name}
+                </if>
+
+                <if test="equit.create_user_id">
+                    and create_uesr_id = #{equit.create_user_id}
+                </if>
+
+                and status = 1
+
+            </where>
         </if>
         order by equit_id
     </select>
@@ -35,25 +59,35 @@
 
         <result column="updateDate" property="updateDate"/>
         <result property="update_user_id" column="update_user_id"/>
+        <result property="status" column="status"/>
         <association property="user" javaType="user" column="create_user_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
         <association property="user" javaType="user" column="update_user_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
     </resultMap>
 
     <select id="findEquitByID" parameterType="Integer" resultMap="equitMap">
-        select equit_id,equit_name,equit_num,createDate,create_user_id,updateDate,update_user_id
+        select equit_id,equit_name,equit_num,createDate,create_user_id,updateDate,update_user_id,status
         from equit
         where equit_id = #{id}
     </select>
 
+    <select id="findEquitByIDOnStatus" parameterType="Integer" resultMap="equitMap">
+        select equit_id,equit_name,equit_num,createDate,create_user_id,updateDate,update_user_id,status
+        from equit
+        where equit_id = #{id} and status = 1
+    </select>
+
     <insert id="addEquit" parameterType="equit">
-        insert into equit(equit_id,equit_name,equit_num,createDate,create_user_id)
-        values(equit_seq.nextval,#{equit.equit_name},#{equit.equit_num},#{equit.createDate},#{equit.create_user_id})
+        insert into equit(equit_id,equit_name,equit_num,createDate,create_user_id,status)
+        values(equit_seq.nextval,#{equit.equit_name},#{equit.equit_num},#{equit.createDate},#{equit.create_user_id},1)
     </insert>
 
-    <delete id="deleteEquit" parameterType="Integer">
-        delete from equit
+
+
+    <update id="deleteEquit" parameterType="Integer">
+        update equit
+        set status = 0
         where equit_id = #{id}
-    </delete>
+    </update>
 
     <update id="updateEquit" parameterType="equit">
         update equit

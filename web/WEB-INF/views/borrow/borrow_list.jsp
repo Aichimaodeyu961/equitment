@@ -96,40 +96,30 @@
         </div>
     </div>
 </div>
-<script>
-    function initInput() {
+<script type="text/javascript">
 
-        $('#borrow_id').val('')
-        $('#user_id').val('')
-        $('#user_name').val('')
-        $('#operate_id').val('')
-        $('#borrow_status option').each(function () {
-            $(this).attr('selected',false)
-        })
-        $('#nostatus').attr('selected',true)
-    }
     function deleteBorrowInfo(borrowid){
-       $.ajax({
-           url:'borrow/delete',
+        $.ajax({
+            url:'borrow/delete',
 
-           data:{
-               borrow_id:borrowid,
-               operate_id:'${loginUser.user_id}'
-           },
-           method:'POST',
-           success:res=>{
-               if(res.msg==1){
-                   alert('撤销成功')
-                   getData('borrow/getBorrowInfo',{pageNum:'${pageInfo.pageNum}',borrow_id:$('#borrow_id').val() , user_id:$('#user_id').val(),
-                       user_name:$('#user_name').val(),operate_id:$('#operate_id').val()},'GET')
-               }else {
-                   alert('撤销失败')
-               }
-           },
-           error:res=>{
-               alert(res.responseText)
-           }
-       })
+            data:{
+                borrow_id:borrowid,
+                operate_id:'${loginUser.user_id}'
+            },
+            method:'POST',
+            success:res=>{
+                if(res.msg==1){
+                    alert('撤销成功')
+                    getData('borrow/getBorrowInfo',{pageNum:'${pageInfo.pageNum}',borrow_id:$('#borrow_id').val() , user_id:$('#user_id').val(),
+                        user_name:$('#user_name').val(),operate_id:$('#operate_id').val()},'GET')
+                }else {
+                    alert('撤销失败')
+                }
+            },
+            error:res=>{
+                alert(res.responseText)
+            }
+        })
     }
 
     function outEquit(borrowid){
@@ -172,16 +162,29 @@
         })
     }
 
+
     $(function () {
-         $('#borrow_status option').each(function () {
-              if($(this).val() == '${searchInfo.borrow_status}'){
-                  $(this).attr('selected' , true)
-              }
-         })
+        $('#borrow_status option').each(function () {
+            if($(this).val() == '${searchInfo.borrow_status}'){
+                $(this).attr('selected' , true)
+            }
+        })
     })
 
     function search() {
         var data = $("#sForm").serialize()
         getData('${uri}',data,'GET')
     }
+    function initInput() {
+
+        $('#borrow_id').val('')
+        $('#user_id').val('')
+        $('#user_name').val('')
+        $('#operate_id').val('')
+        $('#borrow_status option').each(function () {
+            $(this).attr('selected',false)
+        })
+        $('#nostatus').attr('selected',true)
+    }
+
 </script>

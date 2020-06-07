@@ -21,14 +21,14 @@
     </div>
  </div>
  <script type="text/javascript">
-    function prePage() {
-        var url = '${uri}?pageNum=${pageInfo.prePage}'
-        var data = $('#sForm').serialize()
-        getData(url,data,'GET')
-    }
-    function nextPage() {
-        var url = '${uri}?pageNum=${pageInfo.nextPage}'
-        var data = $('#sForm').serialize()
-        getData(url,data,'GET')
-    }
-</script>
+     function prePage() {
+         var url = '${uri}?pageNum=${pageInfo.prePage}'
+         var data = $('#sForm').serialize()
+         getData(url,data,'GET')
+     }
+     function nextPage() {
+         var url = '${uri}?pageNum=${pageInfo.nextPage}'
+         var data = $('#sForm').serialize()
+         getData(url,data,'GET')
+     }
+ </script>

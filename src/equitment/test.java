@@ -8,6 +8,7 @@ import equitment.pojo.*;
 import equitment.service.BorrowInfoService;
 import equitment.service.EquitService;
 import equitment.service.RoleService;
+import equitment.util.Quartz;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.sql.SQLOutput;
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:config/applicationContext.xml")
@@ -29,6 +31,34 @@ public class test {
         System.out.println(equitService.findEquitList(1,1,null));
     }
 
+    @Resource
+    private Borrow_infoDao borrow_infoDao;
+
+    @Resource
+    private Borrow_equit_infoDao borrow_equit_infoDao;
+
+    @Test
+    public void quartzTest(){
+        System.out.println("开始扫描数据库 检查是否有超时");
+        Borrow_info info = new Borrow_info();
+        info.setBorrow_status("已预定");
+        List<Borrow_info> e = borrow_infoDao.findBorrow_infoList(info);
+        long t = new Date().getTime();
+        for (Borrow_info cur : e){
+            System.out.println(cur);
+            if (cur.getShould_back_date()<t){
+                cur.setBorrow_status("超时");
+                long id = cur.getBorrow_equit_info_id();
+                List<Borrow_equit_info> list = borrow_equit_infoDao.findBorrowEquitInfo(id);
+                for(Borrow_equit_info tt: list){
+                    equitDao.backEquit(tt.getEquit_id(),tt.getEquit_num());
+                }
+
+                borrow_infoDao.updateBorrowInfo(cur);
+            }
+        }
+        System.out.println("扫描结束");
+    }
 
     @Resource
     private RoleDao roleDao;
@@ -91,16 +121,17 @@ public class test {
 
     @Test
     public void equitTest(){
-        String [] queitname = {"弓箭","太极扇","太极球","剑"};
-        for(int i =0 ; i<4;i++) {
-            Equit equit = new Equit();
-            equit.setEquit_name(queitname[i]);
-            equit.setEquit_num(80);
-            equit.setCreateDate(new Date().getTime());
-            equit.setCreate_user_id(3);
-            System.out.println(equitDao.addEquit(equit));
-
-        }
+        System.out.println(equitDao.findEquitList(null));
+//        String [] queitname = {"弓箭","太极扇","太极球","剑"};
+//        for(int i =0 ; i<4;i++) {
+//            Equit equit = new Equit();
+//            equit.setEquit_name(queitname[i]);
+//            equit.setEquit_num(80);
+//            equit.setCreateDate(new Date().getTime());
+//            equit.setCreate_user_id(3);
+//            System.out.println(equitDao.addEquit(equit));
+//
+//        }
 //        Equit equit = new Equit();
 //        equit.setEquit_id(2);
 //        equit.setEquit_name("篮球1");

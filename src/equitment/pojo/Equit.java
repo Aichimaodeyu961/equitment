@@ -20,7 +20,7 @@ public class Equit implements Serializable {
     private String updateDateStr;
     private Integer update_user_id;
     private User update_user;
-
+    private Integer status;
     public String getCreateDateStr(){
         return DateUtil.format(new Date(createDate),"yyyy-MM-dd HH:mm:ss");
     }
