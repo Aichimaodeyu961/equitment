@@ -31,10 +31,7 @@
             width: 15%;
         }
         .login {
-            width: 100%;
-            height: 100%;
-            background-image:url("${basePath}/images/background.jpg");
-            background-repeat: no-repeat;
+            background:url("${basePath}/images/background.jpg") no-repeat center/cover;
         }
     </style>
 </head>

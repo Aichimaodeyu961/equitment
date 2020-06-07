@@ -170,7 +170,7 @@
 </body>
 <script type="text/javascript">
     $(function(){
-        <%--action("${basePath}/login/main",'get','');--%>
+        getData('borrow/getBorrowInfo','','GET')
     });
     function action(url,method,formId){
         if(method == 'post'){
