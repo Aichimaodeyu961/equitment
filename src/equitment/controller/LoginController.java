@@ -19,7 +19,7 @@ public class LoginController {
 
     @RequestMapping("")
     public String toLogin(){
-        return "login";
+        return "login2";
     }
 
     @RequestMapping("login")
@@ -29,7 +29,7 @@ public class LoginController {
         User loginUser=userService.login(user);
         if(loginUser==null){
             mv.addObject("errormsg","用户名或密码不正确");
-            mv.setViewName("login");
+            mv.setViewName("login2");
         }else {
             request.getSession().setAttribute("loginUser",loginUser);
             mv.setViewName("index2");

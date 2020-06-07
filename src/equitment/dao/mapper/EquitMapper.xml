@@ -61,7 +61,7 @@
         <result property="update_user_id" column="update_user_id"/>
         <result property="status" column="status"/>
         <association property="user" javaType="user" column="create_user_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
-        <association property="user" javaType="user" column="update_user_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
+        <association property="update_user" javaType="user" column="update_user_id" select="equitment.dao.UserDao.findUserByID" fetchType="lazy"/>
     </resultMap>
 
     <select id="findEquitByID" parameterType="Integer" resultMap="equitMap">
@@ -96,7 +96,7 @@
                 equit_name = #{equit.equit_name},
             </if>
             <if test="equit.equit_num != null ">
-                equit.num = #{equit.equit_num},
+                equit_num = #{equit.equit_num},
             </if>
             <if test="equit.updateDate!=null and equit.updateDate!='' ">
                 updateDate = #{equit.updateDate},
