@@ -1,12 +1,14 @@
 package equitment.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import equitment.dao.UserDao;
 import equitment.pojo.User;
 import equitment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -19,20 +21,45 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByName(String user_name) {
-        return userDao.findUserByName(user_name);
+    public User findUserByName(String name) {
+        return userDao.findUserByName(name);
     }
 
     @Override
-    public Integer register(User user) {
-        user.setCreateDate(new Date().getTime());
-        user.setRole_id(4);
-        user.setUserStatus(1);
-        return userDao.addUser(user);
+    public PageInfo<User> listUsers(PageInfo<User> page, User user) {
+        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        List<User> users = userDao.findAll(user);
+        page = new PageInfo<User>(users);
+        return page;
     }
 
     @Override
-    public User findUserByID(int id) {
-        return userDao.findUserByID(id);
+    public void deleteUserById(Integer user_id) {
+        userDao.deleteUser(user_id);
+    }
+
+    @Override
+    public User getUserById(Integer user_id) {
+        User user = userDao.findUserByID(user_id);
+        return user;
+    }
+
+    @Override
+    public Boolean checkUsername(String name) {
+        boolean flag = false;
+        User num = userDao.findUserByName(name);
+        if(num!=null) {//存在
+            flag = true;
+        }
+        return flag;
+    }
+
+
+    @Override
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 }
+
+
+
