@@ -5,10 +5,13 @@ import equitment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("login")
@@ -19,7 +22,7 @@ public class LoginController {
 
     @RequestMapping("")
     public String toLogin(){
-        return "login";
+        return "login2";
     }
 
     @RequestMapping("login")
@@ -49,7 +52,28 @@ public class LoginController {
         return "login";
     }
 
-
+    @ResponseBody
+    @RequestMapping("rename")
+    public Map<String,Integer> reName(String user_name){
+        Map<String,Integer> map=new HashMap<>();
+        if(userService.findUserByName(user_name)!=null){
+            map.put("code",1);
+        }else {
+            map.put("code",0);
+        }
+        return map;
+    }
+    @RequestMapping("register")
+    @ResponseBody
+    public Map<String,Integer> doRegister(User user){
+        Map<String,Integer> map=new HashMap<>();
+        if(userService.register(user)==1){
+            map.put("code",1);
+        }else {
+            map.put("code",0);
+        }
+        return map;
+    }
 
 
 }

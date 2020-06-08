@@ -50,7 +50,7 @@
     <select id="findUserByName" parameterType="String" resultMap="userMap">
         select user_id,user_name
         from userinfo
-        where user_name = #{name}
+        where user_name = #{param1}
     </select>
     <update id="deleteUser" parameterType="Integer">
         update userinfo

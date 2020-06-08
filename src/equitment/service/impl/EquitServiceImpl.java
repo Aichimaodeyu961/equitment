@@ -36,5 +36,22 @@ public class EquitServiceImpl implements EquitService {
         return equitDao.deleteEquit(equit_id);
     }
 
+    @Override
+    public Equit findById(Integer id) {
+        return equitDao.findEquitByID(id);
+    }
+
+
+    @Override
+    public Integer updateEquit(Equit equit) {
+        int result;
+        if (equit.getEquit_id() == null){
+
+            result = equitDao.addEquit(equit);
+        } else{
+            result = equitDao.updateEquit(equit);
+        }
+        return result;
+    }
 
 }

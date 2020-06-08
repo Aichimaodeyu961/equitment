@@ -2,6 +2,7 @@ package equitment;
 
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.EnumUtil;
 import cn.hutool.core.util.RandomUtil;
 import equitment.dao.*;
 import equitment.pojo.*;
@@ -129,7 +130,9 @@ public class test {
 
     @Test
     public void equitTest(){
-        System.out.println(equitDao.findEquitList(null));
+        Equit equit = new Equit();
+        equit.setEquit_name("羽毛球");
+        System.out.println(equitDao.findEquitList(equit));
 //        String [] queitname = {"弓箭","太极扇","太极球","剑"};
 //        for(int i =0 ; i<4;i++) {
 //            Equit equit = new Equit();
