@@ -770,6 +770,7 @@
         <%--action("${basePath}/login/main",'get','');--%>
     });
     function action(url,method,formId){
+
         if(method == 'post'){
             $.post(
                 url,

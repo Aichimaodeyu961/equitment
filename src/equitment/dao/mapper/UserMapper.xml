@@ -52,7 +52,6 @@
         from userinfo
         where user_name = #{name}
     </select>
-
     <update id="deleteUser" parameterType="Integer">
         update userinfo
         set userstatus = 0
