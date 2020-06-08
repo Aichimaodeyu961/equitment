@@ -41,6 +41,7 @@ public class UserController {
     }
 
 
+
     @RequestMapping("deleteUserById")
     public String deleteUserById(Integer user_id) {
         userService.deleteUserById(user_id);
