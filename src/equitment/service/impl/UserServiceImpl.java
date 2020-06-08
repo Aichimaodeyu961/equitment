@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
         return page;
     }
 
-
     @Override
     public void deleteUserById(Integer user_id) {
         userDao.deleteUser(user_id);

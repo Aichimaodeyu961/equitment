@@ -16,7 +16,6 @@
                 <li class="paginate_button " <c:if test='${!pageInfo.hasNextPage}'>disabled</c:if>>
                     <a href="javascript:nextPage();">下一页</a>
                 </li>
-
             </ul>
         </div>
     </div>

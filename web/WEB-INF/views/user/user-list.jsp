@@ -16,7 +16,6 @@
                 </form>
 
 
-
                 <table class="table table-striped jambo_table bulk_action">
                     <thead>
                     <tr class="headings">
