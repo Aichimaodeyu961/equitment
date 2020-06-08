@@ -13,4 +13,5 @@ public interface UserService {
     User getUserById(Integer user_id);
     Boolean checkUsername(String name);
     void updateUser(User user);
+    void addUser(User user);
 }

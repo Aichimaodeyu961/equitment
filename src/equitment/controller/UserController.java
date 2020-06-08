@@ -5,6 +5,7 @@ import equitment.pojo.Role;
 import equitment.pojo.User;
 import equitment.service.RoleService;
 import equitment.service.UserService;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -72,6 +74,19 @@ public class UserController {
     @RequestMapping("updateUser")
     public String updateUser(User user) {
         userService.updateUser(user);
+        return "redirect:/user/listUsers";
+    }
+
+    @RequestMapping("addUser1")
+    public ModelAndView addUser1(){
+        ModelAndView mv = new ModelAndView("user/add_user");
+        List<Role> roles = roleService.findAllRole();
+        mv.addObject("roles", roles);
+        return mv;
+    }
+    @RequestMapping("addUser2")
+    public String addUser2(User user){
+        userService.addUser(user);
         return "redirect:/user/listUsers";
     }
 }

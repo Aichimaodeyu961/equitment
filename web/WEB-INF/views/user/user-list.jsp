@@ -10,6 +10,10 @@
                                     <span class="input-group-btn">
                                         <a  onclick="action('${basePath}/user/listUsers','post','sForm')">
                                             <button class="btn btn-secondary" type="button" >查询</button></a></span>
+                                <span class="input-group-btn">
+                                    <a  onclick="action('${basePath}/user/addUser1','get','')">
+                                        <button class="btn btn-secondary" type="button" >添加用户</button></a>
+                               </span>
                             </div>
                         </div>
                     </div>
