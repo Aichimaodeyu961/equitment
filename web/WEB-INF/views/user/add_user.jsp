@@ -34,7 +34,7 @@
                         <div class="col-md-6 col-sm-6 ">
                             <%Date date=new Date();
                            Long time=date.getTime();%>
-                            <input class="form-control" type="text" id="createDate"  name="createDate" value="<%=time%>" >
+                            <input class="form-control" type="password" id="createDate"  name="createDate" value="<%=time%>" readonly="true" >
                         </div>
                     </div>
                     <div class="item form-group">
