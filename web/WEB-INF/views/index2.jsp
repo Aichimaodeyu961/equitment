@@ -175,6 +175,7 @@
         getData('borrow/getBorrowInfo','','GET')
     });
     function action(url,method,formId){
+
         if(method == 'post'){
             $.post(
                 url,

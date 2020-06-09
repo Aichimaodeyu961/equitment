@@ -9,6 +9,7 @@ import equitment.pojo.*;
 import equitment.service.BorrowInfoService;
 import equitment.service.EquitService;
 import equitment.service.RoleService;
+import equitment.service.UserService;
 import equitment.util.Quartz;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,10 +77,17 @@ public class test {
 
     @Resource
     private UserDao userDao;
-
+    @Resource
+    private UserService userService;
     @Test
     public void UserDaoTest(){
-        System.out.println(userDao.findAll(null));
+//        System.out.println(userDao.findAll(null));
+//        System.out.println(userDao.deleteUser(4));
+        User user=userDao.findUserByName("admin");
+        System.out.println(user!=null);
+        Boolean user1=userService.checkUsername("admin");
+        System.out.println(user1);
+
     }
 
     @Resource

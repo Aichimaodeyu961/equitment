@@ -57,7 +57,7 @@
 <%--                        <a class="reset_pass" href="#">Lost your password?</a>--%>
 <%--                            <input type="submit" value="登录" >--%>
 <%--                        <button type="submit" style="background: #E8F0FE">登录</button>--%>
-                        <button type="submit" class="btn btn-primary">提交</button>
+                        <button type="submit" class="btn btn-primary">登录</button>
                     </div>
 
                     <div class="clearfix" ></div>
@@ -84,10 +84,10 @@
                 <form id="registerForm" action="${basePath}/login/register" method="post">
                     <h1>注册</h1>
                     <div>
-                        <input type="text" name="user_name" class="form-control" placeholder="用户名" oninput="checkUsername(this)" required />
+                        <input type="text" name="user_name" id="username" class="form-control" placeholder="用户名" oninput="checkUsername(this)" required />
                     </div>
                     <div>
-                        <input type="password" name="password" class="form-control" placeholder="请输入密码" required />
+                        <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码" required />
                     </div>
                     <div>
                         <input type="password" name="repassword" class="form-control" placeholder="确认密码" oninput="checkrePassword(this)" required />
@@ -98,7 +98,7 @@
                         </div>
                         <div style="float: left">
                             <select class="form-control" >
-                                <option value="4" selected>教师</option>
+                                <option selected>教师</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">提交</button>
@@ -132,16 +132,23 @@
         $("#registerForm").submit(function () {
             $.ajax({
                 url:"${basePath}/login/register",
-                data:$(this).serialize(),
+                data:{
+                    user_name:$("#username").val(),
+                    password:$("#password").val(),
+                },
                 method:"post",
                 dataType:"json",
                 success:function (res) {
-                    alert("添加完成！")
+                    if (res.code==1) {
+                        alert("成功");
+                    }else {
+                        alert("失败请重新尝试！")
+                    }
                 }
             });
             return false;
         })
-    })
+    });
         function checkrePassword(_this) {
             var fp=$("#password").val()
             if(fp!=_this.value){
@@ -149,6 +156,23 @@
             }else {
                 _this.setCustomValidity("")
             }
+        };
+        function checkUsername(_this) {
+            $.ajax({
+                url:"${basePath}/login/rename",
+                data:{
+                    user_name:$(_this).val(),
+                },
+                method: "post",
+                dataType: "json",
+                success:res=>{
+                    if (res.code==1){
+                        _this.setCustomValidity("该用户名已存在")
+                    }else{
+                        _this.setCustomValidity("")
+                    }
+            }
+            });
         }
 </script>
 </html>
