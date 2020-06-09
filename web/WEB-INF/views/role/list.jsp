@@ -88,7 +88,6 @@
        }
     }
 
-
     function search() {
         var url = '${uri}'
         var data = $('#sForm').serialize()

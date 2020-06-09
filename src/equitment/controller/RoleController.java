@@ -21,6 +21,8 @@ public class RoleController {
     @Resource
     private RoleService roleService;
 
+
+
     @RequestMapping("getRoleList")
     public ModelAndView getRoleList(@RequestParam(defaultValue = "1",required = false)int pageNum, @RequestParam(defaultValue = "3",required = false)int pageSize , Role role, HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
