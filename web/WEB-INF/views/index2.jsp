@@ -61,7 +61,9 @@
                             <li <c:if test="${loginUser.role_id==3||loginUser.role_id==4}">style="display: none" </c:if>><a><i class="fa fa-home"></i> 系统模块 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')">用户管理</a></li>
-                                    <li><a href="javascript:;" onclick="action('${basePath}/user/listUsers','get','')">角色管理</a></li>
+                                   <c:if test="${loginUser.role.role_name=='超级管理员'}">
+                                    <li><a href="javascript:;" onclick="getData('role/getRoleList','','GET')">角色管理</a></li>
+                                   </c:if>
                                 </ul>
 
 

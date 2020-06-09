@@ -10,5 +10,7 @@ import java.util.List;
 public interface RoleService {
     PageInfo<Role> findRoles(int startPage, int pageSize, Role role);
     List<Role> findAllRole();
-
+    Role findByID(Integer id);
+    Integer deleteRole(Integer id);
+    Integer updateRole(Role role);
 }

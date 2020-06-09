@@ -12,10 +12,13 @@
                      and role_id = #{role.role_id}
                  </if>
                  <if test="role.role_name!=null and role.role_name!=''">
-                     and role_name = #{role.role_name}
+                     and role_name like '%${role.role_name}%'
                  </if>
+
              </where>
+
          </if>
+        order by role_id
     </select>
 
     <select id="findRoleByID" parameterType="Integer" resultType="role">

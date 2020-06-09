@@ -143,13 +143,15 @@ public class test {
 //        System.out.println(equitDao.deleteEquit(2));
     }
 
+    @Resource
+    private RoleService roleService;
+
     @Test
     public void RoleTest(){
-//        Role role
-//                 = new Role();
-//        role.setRole_id(5);
-//        role.setRole_name("开发人员1");
-        System.out.println(roleDao.deleteRole(5));
+        Role role
+                 = new Role();
+        role.setRole_name("开发人员1");
+        System.out.println(roleService.updateRole(role));
     }
 
 
@@ -169,5 +171,7 @@ public class test {
 //        user.setUser_id(3);
 //        user.setPassword("456789");
 //        System.out.println(userDao.updateUser(user));
+        User uesr = userDao.findUserByName("fa");
+        System.out.println(uesr!=null);
     }
 }
