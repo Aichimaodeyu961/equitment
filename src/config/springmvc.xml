@@ -21,16 +21,15 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
     <!-- 启动注解驱动，SpringMVC中很多的功能都需要它来协调，基本标配（掌握） -->
     <mvc:annotation-driven/>
 
-    <mvc:view-controller path="t" view-name="test"/>
 
     <!-- 配置静态资源的处理方式-使用默认servlet进行处理  基本也是标配（掌握）-->
     <mvc:default-servlet-handler/>
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/**"/>-->
-<!--            <mvc:exclude-mapping path="/index"/>-->
-<!--            <mvc:exclude-mapping path="/login"/>-->
-<!--            <bean class="equitment.MyInterceptor.CheckLogin"/>-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/index"/>
+            <mvc:exclude-mapping path="/login"/>
+            <bean class="equitment.MyInterceptor.CheckLogin"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
